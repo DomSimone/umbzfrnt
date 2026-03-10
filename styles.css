@@ -409,6 +409,8 @@ body {
     padding: 16px 20px;
     border-radius: 20px;
     word-wrap: break-word;
+    font-size: 15px;
+    line-height: 1.6;
 }
 
 .message.user .message-content {
@@ -428,6 +430,116 @@ body {
     background-color: #ff4444;
     color: var(--text-primary);
     border-bottom-left-radius: 4px;
+}
+
+.message.system .message-content {
+    background-color: var(--bg-tertiary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+    font-style: italic;
+}
+
+/* Message text styling */
+.message-text {
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* Cursor animation for typing effect */
+.cursor {
+    display: inline-block;
+    width: 8px;
+    height: 16px;
+    background-color: var(--text-primary);
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+/* Message metadata styling */
+.message-metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--text-secondary);
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 4px 8px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 500;
+}
+
+/* Improved input styling */
+.input-wrapper {
+    transition: all 0.3s ease;
+}
+
+.input-wrapper:focus-within {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
+}
+
+/* Button improvements */
+.btn-send {
+    transition: all 0.2s ease;
+}
+
+.btn-send:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+/* Quick action buttons */
+.quick-action {
+    background-color: var(--bg-tertiary);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    padding: 10px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    justify-content: flex-start;
+}
+
+.quick-action:hover {
+    background-color: var(--hover);
+    border-color: var(--text-secondary);
+    transform: translateX(4px);
+}
+
+/* Navigation link improvements */
+.nav-link {
+    position: relative;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--accent);
+    border-radius: 2px;
 }
 
 /* Message Metadata */

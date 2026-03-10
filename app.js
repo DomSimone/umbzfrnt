@@ -94,20 +94,46 @@ function initWebSocket() {
 
 // --- Event Listeners Setup ---
 function setupEventListeners() {
-    document.getElementById('chatInput')?.addEventListener('keydown', handleKeydown);
-    document.getElementById('btnSend')?.addEventListener('click', sendMessage);
-    document.getElementById('btnNewChat')?.addEventListener('click', startNewChat);
-    document.getElementById('btnMic')?.addEventListener('click', toggleVoiceRecording);
-    document.getElementById('modelSelector')?.addEventListener('change', handleTopicChange);
-    document.getElementById('btnCheckHealth')?.addEventListener('click', () => checkBackendConnection(true));
-    document.getElementById('btnAttach')?.addEventListener('click', () => alert('File attachment feature is coming soon!'));
-    
-    document.getElementById('btnWebSearch')?.addEventListener('click', toggleWebSearch);
+    // Input and send button
+    const chatInput = document.getElementById('chatInput');
+    const btnSend = document.getElementById('btnSend');
+    const btnNewChat = document.getElementById('btnNewChat');
+    const btnMic = document.getElementById('btnMic');
+    const modelSelector = document.getElementById('modelSelector');
+    const btnCheckHealth = document.getElementById('btnCheckHealth');
+    const btnAttach = document.getElementById('btnAttach');
 
-    document.querySelectorAll('.quick-action').forEach(button => {
+    if (chatInput) chatInput.addEventListener('keydown', handleKeydown);
+    if (btnSend) btnSend.addEventListener('click', sendMessage);
+    if (btnNewChat) btnNewChat.addEventListener('click', startNewChat);
+    if (btnMic) btnMic.addEventListener('click', toggleVoiceRecording);
+    if (modelSelector) modelSelector.addEventListener('change', handleTopicChange);
+    if (btnCheckHealth) btnCheckHealth.addEventListener('click', () => checkBackendConnection(true));
+    if (btnAttach) btnAttach.addEventListener('click', () => alert('File attachment feature is coming soon!'));
+
+    // Quick action buttons
+    const quickActions = document.querySelectorAll('.quick-action');
+    quickActions.forEach(button => {
         button.addEventListener('click', (e) => {
-            const action = e.currentTarget.getAttribute('onclick').match(/'(.*?)'/)[1];
-            quickAction(action);
+            e.preventDefault();
+            const action = e.currentTarget.getAttribute('onclick');
+            if (action) {
+                const match = action.match(/quickAction\(['"]([^'"]+)['"]\)/);
+                if (match) {
+                    quickAction(match[1]);
+                }
+            }
+        });
+    });
+
+    // Navigation links
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            // Remove active class from all links
+            navLinks.forEach(l => l.classList.remove('active'));
+            // Add active class to clicked link
+            link.classList.add('active');
         });
     });
 }
